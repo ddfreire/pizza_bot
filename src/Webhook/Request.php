@@ -48,6 +48,10 @@ class Request
         return $content;
     }
 
+    /**
+     * Sets an validation token
+     * @param $validationToken
+     */
     public static function setValidationToken($validationToken)
     {
         self::$validationToken = $validationToken;
