@@ -8,7 +8,7 @@ class ResponseException extends Exception
 {
     private $response;
 
-    public function __construct($message = '', $response, $code = 0)
+    public function __construct($message = '', $response = null, $code = 0)
     {
         parent::__construct($message, $code, null);
         $this->response = $response;

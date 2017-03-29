@@ -3,6 +3,7 @@
 namespace PowerZAP\Api;
 
 use Exception;
+use PowerZAP\Constants;
 
 class Client
 {
@@ -16,14 +17,15 @@ class Client
 
     private $ch;
     private $requestHeaders;
+    private $timeout = 30;
 
     /**
      * Client constructor.
      */
-    function __construct()
+    function __construct($url = null)
     {
         $this->requestHeaders = [
-            'Authorization: Bearer ' . self::$apiKey,
+            'X-Authorization: Bearer ' . self::$apiKey,
             'Cache-Control: no-cache',
             'Content-Type: application/json'
         ];
@@ -31,6 +33,9 @@ class Client
         $this->ch = curl_init();
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->ch, CURLOPT_HEADER, true);
+        curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($this->ch, CURLOPT_TIMEOUT, $this->timeout);
     }
 
     /**
@@ -60,7 +65,7 @@ class Client
      */
     public function setEndpoint($fragment, $id = null)
     {
-        curl_setopt($this->ch, CURLOPT_URL, 'https://api.powerzap.dev/' . self::$apiVersion . '/' . $fragment . (!is_null($id) ? '/' . $id : ''));
+        curl_setopt($this->ch, CURLOPT_URL, Constants::API_URL . '/' . self::$apiVersion . '/' . $fragment . (!is_null($id) ? '/' . $id : ''));
         return $this;
     }
 
@@ -90,11 +95,16 @@ class Client
         $output = curl_exec($this->ch);
         $headerSize = curl_getinfo($this->ch, CURLINFO_HEADER_SIZE);
         $httpCode = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
+        $curlError  = curl_error($this->ch);
 
         $header = substr($output, 0, $headerSize);
         $body = substr($output, $headerSize);
 
         curl_close($this->ch);
+
+        if($httpCode == 0) {
+            throw new ResponseException($curlError);
+        }
 
         if ($httpCode >= 400) {
             throw new ResponseException('Unexpected HTTP response: ' . $httpCode . ' => ' . $body, $body, $httpCode);

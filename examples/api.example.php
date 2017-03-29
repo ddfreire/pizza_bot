@@ -5,7 +5,7 @@ require '../vendor/autoload.php';
 use PowerZAP\Api\Client;
 
 // Setup
-Client::setAccessKey('904e1c1ec817b5f7837fd58c500d612c');
+Client::setAccessKey('2a807eb2c319aebcbb072a1d4e9aeaf1');
 
 // Gets the entire collection
 $client = new Client;
