@@ -5,6 +5,7 @@ namespace PowerZAP\Webhook;
 class Request
 {
     private static $validationToken = null;
+    private static $returnType = 'class';
 
     /**
      * Parses and run a callable if the current request is valid.
@@ -24,8 +25,22 @@ class Request
     }
 
     /**
+     * Define return type of data parse (class, array)
+     *
+     * @param $type
+     * @throws \Exception
+     */
+    public static function setReturnType($type)
+    {
+        if(!in_array($type, ['class', 'array'])) {
+            throw new ParseException('Invalid return type');
+        }
+        self::$returnType = $type;
+    }
+
+    /**
      * Simply returns the body of current PowerZAP's Webhook request if it's valid.
-     * @return \stdClass
+     * @return \stdClass || Array
      * @throws ParseException
      */
     public static function parse()
@@ -35,7 +50,7 @@ class Request
         }
 
         $raw = file_get_contents('php://input');
-        $content = json_decode($raw);
+        $content = json_decode($raw, (self::$returnType == 'array' ? 1 : null));
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new ParseException('Received invalid content: ' . $raw);
