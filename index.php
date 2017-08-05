@@ -54,6 +54,8 @@ class PizzaBot
                 }
             }
 
+            file_put_contents(dirname(__FILE__) . '/log.txt', json_encode($data, 1) . "\r\n", FILE_APPEND);
+
         });
     }
 
