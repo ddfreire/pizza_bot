@@ -2,3 +2,4 @@
 /vendor/
 configs.php
 composer.lock
+log.txt
