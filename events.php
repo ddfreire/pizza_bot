@@ -5,10 +5,11 @@
 
         public static function receivedMessage($data)
         {
-            PizzaBot::setContextId($data->chat->id);
-            $state = State::getState();
 
             echo 'meu chat id é : ' . $data->chat->id;
+
+            PizzaBot::setContextId($data->chat->id);
+            $state = State::getState();
 
             $result = PizzaBot::getWatson()->sendMessage($data->body, (empty($state['state_context']) ? null : json_decode($state['state_context'], 1)));
 
