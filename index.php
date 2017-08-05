@@ -40,7 +40,7 @@ class PizzaBot
 
         $client = new Client();
         $client->setMethod(Client::HTTP_POST);
-        $client->setEndpoint('/chats/686600/messages');
+        $client->setEndpoint('chats/686600/messages/');
         $client->setBody([
             'text' => 'não te entendi...'
         ]);
