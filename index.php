@@ -37,6 +37,8 @@ class PizzaBot
 
         Request::parseRun(function ($data) {
 
+            file_put_contents(dirname(__FILE__) . '/log.txt', json_encode($data, 1) . "\r\n", FILE_APPEND);
+            
             //Valid token
             if(isset($data->validToken) && $data->validToken == true) {
                 echo $data->token;
@@ -53,8 +55,6 @@ class PizzaBot
                     }
                 }
             }
-
-            file_put_contents(dirname(__FILE__) . '/log.txt', json_encode($data, 1) . "\r\n", FILE_APPEND);
 
         });
     }
