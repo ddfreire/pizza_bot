@@ -51,7 +51,7 @@ class PizzaBot
             // Do what you want.
             if(isset($data->messages)) {
                 foreach($data->messages as $key => $message) {
-                    if(method_exists(__CLASS__, $key)) {
+                    if(method_exists(Events, $key)) {
                         foreach($message as $data) {
                             Events::$key($data);
                         }
