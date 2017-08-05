@@ -14,7 +14,7 @@ class Process
                 $txt = 'Beleza eu já sei que o sabor[es] [e] ';
                 foreach ($entities as $entity) {
                     if($entity['entity'] == 'sabor') {
-                        $txt = $entity['value'] . ', ';
+                        $txt .= $entity['value'] . ', ';
                     }
                 }
                 $txt = rtrim($txt, ', ');
