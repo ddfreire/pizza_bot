@@ -16,12 +16,12 @@
             if(count($result['intents']) < 1
                 || $result['intents'][0]['confidence'] <= 0.5
                 || !Process::main($result['intents'][0]['intent'], $result['entities'])) {
-                if(count($result['output']) > 0 && !empty($result['intents'][0]['text'])) {
+                if(count($result['output']) > 0 && !empty($result['output']['text'][0])) {
                     $client = new Client();
                     $client->setMethod(Client::HTTP_POST);
                     $client->setEndpoint('chats/' . PizzaBot::getContextId() . '/messages');
                     $client->setBody([
-                        'text' => $result['intents'][0]['text']
+                        'text' => $result['output']['text'][0]
                     ]);
                     $client->send();
                 } else {
