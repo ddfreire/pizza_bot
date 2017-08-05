@@ -1,20 +1,6 @@
 {
-    "name": "powerzap/powerzap-php-sdk",
-    "description": "API client and Webhook request processing",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Calebe Oliveira",
-            "email": "becalebe@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "PowerZAP\\": "src/"
-        }
-    },
     "require": {
-        "php": "^5.6 || ^7.0"
+        "powerzap/powerzap-php-sdk": "^1.0",
+        "guzzlehttp/guzzle": "~6.0"
     }
 }
