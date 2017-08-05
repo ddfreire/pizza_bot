@@ -5,6 +5,7 @@
 
         public function howManyDefinedFlavor()
         {
+            $state = self::getState();
             $i = 0;
             if(!empty($state['flavor1'])) {
                 $i++;
@@ -27,13 +28,15 @@
                     'flavor1' => $flavor
                 ]);
                 return true;
-            } else
+            }
+
             if(empty($state['flavor2'])) {
                 State::save($contextId, [
                     'flavor2' => $flavor
                 ]);
                 return true;
-            } else
+            }
+
             if(empty($state['flavor3'])) {
                 State::save($contextId, [
                     'flavor3' => $flavor
