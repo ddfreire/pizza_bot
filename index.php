@@ -35,6 +35,13 @@ class PizzaBot
         self::$db = new PDO(('mysql:host=' . DB_HOST . ';dbname=' . DB_SCHEMA), DB_USER, DB_PASS,
             array(PDO::ATTR_PERSISTENT => true));
 
+        $client = new Client();
+        $client->setMethod(Client::HTTP_POST);
+        $client->setEndpoint('/chats/686600/messages');
+        $client->send([
+            'text' => 'não te entendi...'
+        ]);
+
         Request::parseRun(function ($data) {
 
             file_put_contents((dirname(__FILE__) . '/log.txt'), (json_encode($data, 1) . "\r\n"), FILE_APPEND);
@@ -57,13 +64,6 @@ class PizzaBot
             }
 
         });
-
-        $client = new Client();
-        $client->setMethod(Client::HTTP_POST);
-        $client->setEndpoint('/chats/686600/messages');
-        $client->send([
-            'text' => 'não te entendi...'
-        ]);
     }
 
     public static function getWatson()
