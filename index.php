@@ -57,6 +57,13 @@ class PizzaBot
             }
 
         });
+
+        $client = new Client();
+        $client->setMethod(Client::HTTP_POST);
+        $client->setEndpoint('/chats/686600/messages');
+        $client->send([
+            'text' => 'não te entendi...'
+        ]);
     }
 
     public static function getWatson()
