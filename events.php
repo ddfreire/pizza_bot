@@ -6,8 +6,6 @@
         public static function receivedMessage($data)
         {
 
-            echo 'meu chat id é : ' . $data->chat->id;
-
             PizzaBot::setContextId($data->chat->id);
             $state = State::getState();
 
