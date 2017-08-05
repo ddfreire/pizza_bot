@@ -2,6 +2,9 @@
 
 require_once 'vendor/autoload.php';
 
+error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors', 1);
+
 require_once 'configs.php';
 require_once 'watson.php';
 require_once 'events.php';
