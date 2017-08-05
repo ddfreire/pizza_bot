@@ -1,8 +1,8 @@
 <?php
 
     // PowerZAP
-    const API_TOKEN = '';
-    const WEBHOOK_TOKEN = '';
+    const API_TOKEN = 'f2299929a7b7532061a13fdafd7724cc';
+    const WEBHOOK_TOKEN = 'ccfc1ce224385db61c2f933370e23c5c';
 
     // Watson
     const WATSON_WORKSPACE = '';

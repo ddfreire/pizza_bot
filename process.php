@@ -1,5 +1,7 @@
 <?php
 
+use \PowerZAP\Api\Client;
+
 class Process
 {
 
@@ -7,19 +9,34 @@ class Process
 
     public static function main($intent, $entities)
     {
-        print_r($intent);
         switch ($intent) {
             case self::INTENT_REQUEST_PIZZA:
-                echo 'Ok já sei que você que uma pizza de: ';
+                $txt = 'Beleza eu já sei que o sabor[es] [e] ';
                 foreach ($entities as $entity) {
                     if($entity['entity'] == 'sabor') {
-                        echo $entity['value'] . ', ';
+                        $txt = $entity['value'] . ', ';
                     }
                 }
+                $txt = rtrim($txt, ', ');
+                if(count($entities) > 1) {
+                    $txt = str_replace(['[es]', '[e]'], ['es', 'são'], $txt);
+                } else {
+                    $txt = str_replace(['[es]', '[e]'], ['', 'é'], $txt);
+                }
+                $client = new Client();
+                $client->setMethod(Client::HTTP_POST);
+                $client->setEndpoint('/chats/' . PizzaBot::getContextId() . '/messages');
+                $client->send([
+                    'text' => $txt
+                ]);
             break;
-
             default:
-                echo 'Não te compreendi';
+                $client = new Client();
+                $client->setMethod(Client::HTTP_POST);
+                $client->setEndpoint('/chats/' . PizzaBot::getContextId() . '/messages');
+                $client->send([
+                    'text' => 'não te entendi...'
+                ]);
         }
 
     }
