@@ -23,19 +23,19 @@
             $state = self::getState();
 
             if(empty($state['flavor1'])) {
-                State::save(PizzaBot::getContextId(), [
+                State::save($contextId, [
                     'flavor1' => $flavor
                 ]);
                 return true;
             } else
             if(empty($state['flavor2'])) {
-                State::save(PizzaBot::getContextId(), [
+                State::save($contextId, [
                     'flavor2' => $flavor
                 ]);
                 return true;
             } else
             if(empty($state['flavor3'])) {
-                State::save(PizzaBot::getContextId(), [
+                State::save($contextId, [
                     'flavor3' => $flavor
                 ]);
                 return true;

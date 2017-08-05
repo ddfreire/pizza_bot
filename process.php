@@ -15,7 +15,7 @@ class Process
                 foreach ($entities as $entity) {
                     if($entity['entity'] == 'sabor') {
                         $txt .= $entity['value'] . ', ';
-                        State::defineFlavor(PizzaBot::getContextId(), $entity);
+                        State::defineFlavor(PizzaBot::getContextId(), $entity['value']);
                     }
                 }
                 $txt = rtrim($txt, ', ');
