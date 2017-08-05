@@ -26,17 +26,19 @@ class Process
                 $client = new Client();
                 $client->setMethod(Client::HTTP_POST);
                 $client->setEndpoint('/chats/' . PizzaBot::getContextId() . '/messages');
-                $client->send([
+                $client->setBody([
                     'text' => $txt
                 ]);
+                $client->send();
             break;
             default:
                 $client = new Client();
                 $client->setMethod(Client::HTTP_POST);
                 $client->setEndpoint('/chats/' . PizzaBot::getContextId() . '/messages');
-                $client->send([
+                $client->setBody([
                     'text' => 'não te entendi...'
                 ]);
+                $client->send();
         }
 
     }
