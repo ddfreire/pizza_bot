@@ -55,8 +55,6 @@ class PizzaBot
             }
 
         });
-
-        Events::receivedMessage('oi');
     }
 
     public static function getWatson()
