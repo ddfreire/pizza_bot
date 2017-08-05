@@ -7,13 +7,13 @@
         {
             $state = self::getState();
             $i = 0;
-            if(!empty($state['flavor1'])) {
+            if(!empty($state['state_flavor1'])) {
                 $i++;
             }
-            if(!empty($state['flavor2'])) {
+            if(!empty($state['state_flavor2'])) {
                 $i++;
             }
-            if(!empty($state['flavor3'])) {
+            if(!empty($state['state_flavor3'])) {
                 $i++;
             }
             return $i;
