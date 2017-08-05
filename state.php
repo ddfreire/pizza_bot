@@ -3,6 +3,47 @@
     class State
     {
 
+        public function howManyDefinedFlavor()
+        {
+            $i = 0;
+            if(!empty($state['flavor1'])) {
+                $i++;
+            }
+            if(!empty($state['flavor2'])) {
+                $i++;
+            }
+            if(!empty($state['flavor3'])) {
+                $i++;
+            }
+            return $i;
+        }
+
+        public static function defineFlavor($contextId, $flavor)
+        {
+            $state = self::getState();
+
+            if(empty($state['flavor1'])) {
+                State::save(PizzaBot::getContextId(), [
+                    'flavor1' => $flavor
+                ]);
+                return true;
+            } else
+            if(empty($state['flavor2'])) {
+                State::save(PizzaBot::getContextId(), [
+                    'flavor2' => $flavor
+                ]);
+                return true;
+            } else
+            if(empty($state['flavor3'])) {
+                State::save(PizzaBot::getContextId(), [
+                    'flavor3' => $flavor
+                ]);
+                return true;
+            }
+
+            return false;
+        }
+
         public static function getState()
         {
             $db = PizzaBot::getDb();

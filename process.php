@@ -15,6 +15,7 @@ class Process
                 foreach ($entities as $entity) {
                     if($entity['entity'] == 'sabor') {
                         $txt .= $entity['value'] . ', ';
+                        State::defineFlavor(PizzaBot::getContextId(), $entity);
                     }
                 }
                 $txt = rtrim($txt, ', ');
@@ -23,6 +24,25 @@ class Process
                 } else {
                     $txt = str_replace(['[es]', '[e]'], ['', 'é'], $txt);
                 }
+
+                $manyFlavor = State::howManyDefinedFlavor();
+
+                switch ($manyFlavor) {
+                    case 1:
+                        $txt .= ", você tem direito a mais 2 sabores";
+                        break;
+                    case 2:
+                        $txt .= ", você tem direito a mais 1 sabores";
+                        break;
+                    case 3:
+                        $txt .= ", mas qual seria o tamanho da sua pizza?";
+                        break;
+                    default:
+                        $txt = "Me informe os sabores desejados";
+                        break;
+                }
+
+
                 $client = new Client();
                 $client->setMethod(Client::HTTP_POST);
                 $client->setEndpoint('chats/' . PizzaBot::getContextId() . '/messages');

@@ -17,7 +17,7 @@
                 Process::main('any_thing', []);
             }
 
-            State::save(1, [
+            State::save(PizzaBot::getContextId(), [
                 'context' => json_encode($result['context'], 1)
             ]);
         }
