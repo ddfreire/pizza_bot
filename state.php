@@ -3,7 +3,7 @@
     class State
     {
 
-        public function howManyDefinedFlavor()
+        public static function howManyDefinedFlavor()
         {
             $state = self::getState();
             $i = 0;
@@ -23,21 +23,21 @@
         {
             $state = self::getState();
 
-            if(empty($state['flavor1'])) {
+            if(empty($state['state_flavor1'])) {
                 State::save($contextId, [
                     'flavor1' => $flavor
                 ]);
                 return true;
             }
 
-            if(empty($state['flavor2'])) {
+            if(empty($state['state_flavor2'])) {
                 State::save($contextId, [
                     'flavor2' => $flavor
                 ]);
                 return true;
             }
 
-            if(empty($state['flavor3'])) {
+            if(empty($state['state_flavor3'])) {
                 State::save($contextId, [
                     'flavor3' => $flavor
                 ]);

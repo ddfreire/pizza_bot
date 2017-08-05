@@ -59,8 +59,6 @@ class PizzaBot
                 }
             }
 
-            print_r($data);
-
         });
     }
 
